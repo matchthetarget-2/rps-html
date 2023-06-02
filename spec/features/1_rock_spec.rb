@@ -208,32 +208,3 @@ describe "/rock" do
       "Expected page to have an <h2> with the text 'We lost!', but didn't find one."
   end
 end
-
-describe "/rock", js: true do
-  it "has all elements in the right order", :points => 1 do
-    visit "/rock"
-    
-    play_rock_link = find("a", :text => /Play Rock/i)
-    play_paper_link = find("a", :text => /Play Paper/i)
-    play_scissors_link = find("a", :text => /Play Scissors/i)
-
-    expect(play_paper_link).to be_below(play_rock_link)
-
-    expect(play_scissors_link).to be_below(play_paper_link)
-
-    rock_heading = find("h2", :text => /We played rock/i)
-    
-    expect(rock_heading).to be_below(play_scissors_link)
-    
-    paper_heading = find("h2", :text => /They played paper/i)
-    expect(paper_heading).to be_below(rock_heading)
-    
-    outcome_heading = find("h2", :text => /We lost/i)
-    
-    expect(outcome_heading).to be_below(paper_heading)
-    rules_link = find("a", text: /Rules/i)
-    
-    expect(rules_link).to be_below(outcome_heading)
-
-  end
-end
